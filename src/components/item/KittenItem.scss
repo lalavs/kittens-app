@@ -1,0 +1,10 @@
+.item {
+  position: relative;
+  margin: 0 auto;
+  max-width: 225px;
+  max-height: 225px;
+  &-img {
+    width: 225px;
+    height: 225px;
+  }
+}
