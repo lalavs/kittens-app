@@ -6,11 +6,12 @@ export interface IKitten {
 }
 
 class Kittens {
-  kittens: IKitten[] = [];
-
   constructor() {
     makeAutoObservable(this);
   };
+
+  kittens: IKitten[] = [];
+  favoriteKittens: IKitten[] = [];
 
   setKittens(kittens: IKitten[]) {
     this.kittens = kittens;
@@ -19,8 +20,24 @@ class Kittens {
   get items(): IKitten[] {
     return this.kittens;
   };
+
+  setFavoriteKittens(favoriteKittens: IKitten[]) {
+    this.favoriteKittens = favoriteKittens;
+  };
+
+  get favoriteItems() {
+    return this.favoriteKittens;
+  };
+
+  addToFavoriteKittens(item: IKitten) {
+    this.favoriteKittens.push(item);
+  };
+
+  removeFromFavoriteKittens(id: string) {
+    this.favoriteKittens = this.favoriteKittens.filter((item: IKitten) => item.id !== id);
+  };
 }
 
-const kittens = new Kittens();
+const store = new Kittens();
 
-export default kittens;
+export default store;
