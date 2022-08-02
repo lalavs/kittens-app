@@ -6,12 +6,12 @@ export interface IKitten {
 }
 
 class Kittens {
+  kittens: IKitten[] = [];
+  favoriteKittens: IKitten[] = [];
+
   constructor() {
     makeAutoObservable(this);
   };
-
-  kittens: IKitten[] = [];
-  favoriteKittens: IKitten[] = [];
 
   setKittens(kittens: IKitten[]) {
     this.kittens = kittens;
@@ -31,10 +31,16 @@ class Kittens {
 
   addToFavoriteKittens(item: IKitten) {
     this.favoriteKittens.push(item);
+    this.updateLocalStorage();
   };
 
   removeFromFavoriteKittens(id: string) {
     this.favoriteKittens = this.favoriteKittens.filter((item: IKitten) => item.id !== id);
+    this.updateLocalStorage();
+  };
+
+  updateLocalStorage() {
+    localStorage.setItem('favorites', JSON.stringify(this.favoriteKittens));
   };
 }
 
